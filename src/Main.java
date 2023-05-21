@@ -29,16 +29,9 @@ public class Main {
             allTransactions.remove(0);
             allInfo.remove(0);
             translator(allTransactions);
-            ArrayList<String> helper = new ArrayList<>();
-//            for (String x : allInfo) {
-//                for (char ch : x.toCharArray()) {
-//                    if (ch == '/')
-//                        helper.add(x);
-//                }
-//            }
-//            allInfo.removeAll(helper);
+
             for (String x : allInfo) {// Здесь я преобразовываю строки с информацией и вычленяю из неё только нужные слова
-                List<String> support = Arrays.asList(x.split("\\\\|/")); // Убираем все знаки "\"
+                List<String> support = Arrays.asList(x.split("\\\\|/")); // Убираем все знаки "\" и "/"
                 List<String> addSup = support.stream().distinct().collect(Collectors.toList());//Избавляемся от множества
                 addSup.remove(0);// Первый элемент нам всегда не нужен
                 String[] delSpace = (addSup.get(addSup.size() - 1)).split(" ");
@@ -59,7 +52,7 @@ public class Main {
             }
             System.out.println("Сумма расходов: " + creditOut+
                     "\nСумма доходов: "+debitOut);
-            System.out.println("Сумма расходов по оргонизациям:");
+            System.out.println("Сумма расходов по организациям:");
             for(int i = 0; i<credit.size();i++){
                 if(credit.get(i) == 0.0){
                     continue;
