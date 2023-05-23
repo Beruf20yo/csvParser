@@ -1,3 +1,5 @@
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +10,7 @@ import java.util.stream.Collectors;
 
 
 public class Main {
-    public static final String csvFile = "src/movementList.csv";
+    public static final String csvFile = "src/resources/movementList.csv";
     public static ArrayList<Double> credit = new ArrayList<>();
     public static ArrayList<Double> debit = new ArrayList<>();
     public static ArrayList<String> info = new ArrayList<>();
@@ -31,16 +33,16 @@ public class Main {
             translator(allTransactions);
 
             for (String x : allInfo) {// Здесь я преобразовываю строки с информацией и вычленяю из неё только нужные слова
-                List<String> support = Arrays.asList(x.split("\\\\|/")); // Убираем все знаки "\" и "/"
+                List<String> support = Arrays.asList(x.split("[\\\\/]")); // Убираем все знаки "\" и "/"
                 List<String> addSup = support.stream().distinct().collect(Collectors.toList());//Избавляемся от множества
                 addSup.remove(0);// Первый элемент нам всегда не нужен
                 String[] delSpace = (addSup.get(addSup.size() - 1)).split(" ");
                 addSup.set((addSup.size() - 1), delSpace[0]);
-                String supporT = "";
+                StringBuilder supporT = new StringBuilder();
                 for (String help : addSup) {
-                    supporT += " " + help;
+                    supporT.append(" ").append(help);
                 }
-                info.add(supporT);
+                info.add(supporT.toString());
             }
             double debitOut = 0.0;
             for(Double deb: debit){
